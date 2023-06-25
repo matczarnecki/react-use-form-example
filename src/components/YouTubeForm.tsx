@@ -53,6 +53,7 @@ export const YouTubeForm = () => {
     getValues,
     setValue,
     reset, // note that after reset, values aren't empty, but rather set to initial state
+    trigger // for triggering validation manually
   } = form;
 
   const {
@@ -275,6 +276,11 @@ export const YouTubeForm = () => {
 
         <button type="button" onClick={() => reset()}>
           Reset
+        </button>
+
+        {/* trigger method may receive specific fields */}
+        <button type="button" onClick={() => trigger('age')}>
+          Validate
         </button>
       </form>
       <DevTool control={control} />
