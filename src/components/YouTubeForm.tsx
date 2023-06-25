@@ -52,7 +52,7 @@ export const YouTubeForm = () => {
     getValues,
     setValue,
   } = form;
-  const { errors } = formState;
+  const { errors, isDirty, isValid } = formState;
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -83,7 +83,7 @@ export const YouTubeForm = () => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      // this way you can perform check against different fields in the form without loosing the performance
+      // this way you can perform check against different fields in the form without losing the performance
       console.log("watch value:", value);
     });
     return () => subscription.unsubscribe();
@@ -239,7 +239,7 @@ export const YouTubeForm = () => {
           <p className="error">{errors.dateOfBirth?.message}</p>
         </div>
 
-        <button>Submit</button>
+        <button disabled={!isDirty || !isValid}>Submit</button>
 
         <button type="button" onClick={handleGetValues}>
           Get values
