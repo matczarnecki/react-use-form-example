@@ -51,6 +51,7 @@ export const YouTubeForm = () => {
     watch,
     getValues,
     setValue,
+    reset, // note that after reset, values aren't empty, but rather set to initial state
   } = form;
 
   const {
@@ -91,6 +92,12 @@ export const YouTubeForm = () => {
       shouldDirty: true,
     });
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset(); // reset method may receive additional options that allow us to costimize behaviour of the method
+    }
+  }, [isSubmitSuccessful]);
 
   useEffect(() => {
     const subscription = watch((value) => {
@@ -258,6 +265,10 @@ export const YouTubeForm = () => {
 
         <button type="button" onClick={handleSetValue}>
           Set value
+        </button>
+
+        <button type="button" onClick={() => reset()}>
+          Reset
         </button>
       </form>
       <DevTool control={control} />
