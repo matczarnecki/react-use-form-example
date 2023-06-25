@@ -43,7 +43,15 @@ export const YouTubeForm = () => {
     },
   });
 
-  const { register, control, handleSubmit, formState, watch, getValues, setValue } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -62,12 +70,12 @@ export const YouTubeForm = () => {
   };
 
   const handleSetValue = () => {
-    setValue('username', '', {
+    setValue("username", "", {
       shouldValidate: true, // additional options
       shouldTouch: true,
       shouldDirty: true,
     });
-  }
+  };
 
   useEffect(() => {
     const subscription = watch((value) => {
@@ -136,7 +144,16 @@ export const YouTubeForm = () => {
 
         <div className="form-control">
           <label htmlFor="twitter">Twitter</label>
-          <input type="text" id="twitter" {...register("social.twitter")} />
+          <input
+            type="text"
+            id="twitter"
+            {...register("social.twitter", {
+              // when field is set to disabled, it's value is set to undefined and validation is not performed
+              // disabled: true,
+              disabled: watch('channel') === "",
+              required: "Enter twitter profile"
+            })}
+          />
         </div>
 
         <div className="form-control">
