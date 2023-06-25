@@ -150,8 +150,8 @@ export const YouTubeForm = () => {
             {...register("social.twitter", {
               // when field is set to disabled, it's value is set to undefined and validation is not performed
               // disabled: true,
-              disabled: watch('channel') === "",
-              required: "Enter twitter profile"
+              disabled: watch("channel") === "",
+              required: "Enter twitter profile",
             })}
           />
         </div>
