@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
@@ -42,7 +43,7 @@ export const YouTubeForm = () => {
     },
   });
 
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -53,6 +54,14 @@ export const YouTubeForm = () => {
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted", data);
   };
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      // this way you can perform check against different fields in the form without loosing the performance
+      console.log("watch value:", value);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   renderCount++;
   return (
