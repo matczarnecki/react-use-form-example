@@ -41,6 +41,7 @@ export const YouTubeForm = () => {
         dateOfBirth: new Date(),
       };
     },
+    mode: "onBlur" // default mode is onSubmit, but can be changed here
   });
 
   const {
